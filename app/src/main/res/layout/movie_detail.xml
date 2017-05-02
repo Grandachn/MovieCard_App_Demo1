@@ -3,55 +3,66 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar_height"
-        android:text="详情"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        />
+    <include
+        layout="@layout/return_title_bar" />
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimaryDark"
-        />
+        android:layout_height="250dp">
 
-    <LinearLayout
+
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/movie_detail_viewpager"/>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/movie_detail_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="20dp"
-            android:layout_weight="3"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="拆弹专家"
+            android:textColor="@android:color/black"
             android:textSize="20dp"
-            android:textAlignment="textStart"
             android:layout_marginLeft="20dp"
             />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@color/colorPrimaryDark"
+            android:layout_width="75dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/star_4"
             />
 
         <TextView
-            android:layout_width="20dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:id="@+id/detail_point"
             android:text="8.0"
-            android:textSize="20dp"
-            android:textAlignment="textStart"
+            android:textSize="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+
             />
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
