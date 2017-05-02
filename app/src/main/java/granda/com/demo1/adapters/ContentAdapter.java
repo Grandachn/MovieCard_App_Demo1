@@ -1,6 +1,8 @@
 package granda.com.demo1.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import granda.com.demo1.R;
+import granda.com.demo1.activity.MovieDetailActivity;
 import granda.com.demo1.https.AsynImageLoader;
 import granda.com.demo1.widget.MovieCardView;
 
@@ -88,7 +91,9 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
 
             case R.id.imageButton1:
                 Log.d("tag", "Btn_onClick: " + "view = " + view);
-                Toast.makeText(mContext,"imageButton1",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,MovieDetailActivity.class);
+                mContext.startActivity(intent);
+               // Toast.makeText(mContext,"imageButton1",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton2:
                 Log.d("tag", "Tv_onClick: " + "view = " + view);

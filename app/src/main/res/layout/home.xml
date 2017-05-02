@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:text="最新"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        />
+
+    <include
+        android:id="@+id/swp"
+        layout="@layout/home_refrsh_list" />
+</LinearLayout>

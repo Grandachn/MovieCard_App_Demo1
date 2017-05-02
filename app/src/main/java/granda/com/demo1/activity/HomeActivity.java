@@ -13,7 +13,7 @@ import granda.com.demo1.adapters.ContentAdapter;
 import granda.com.demo1.R;
 import granda.com.demo1.widget.AutoLoadListView;
 
-public class MainActivity2 extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements AutoLoadListView.Pagingable, SwipeRefreshLayout.OnRefreshListener {
     private AutoLoadListView mListView;
     private List<String> mDatas = new ArrayList<>();
@@ -23,7 +23,6 @@ public class MainActivity2 extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
         initUI();
         initData();
         addEvent();

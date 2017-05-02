@@ -132,7 +132,7 @@ public class AsynImageLoader {
                     // 获取第一个任务，并将之从任务队列中删除
                     Task task = taskQueue.remove(0);
                     // 将下载的图片添加到缓存
-                    task.bitmap = PicUtil.getbitmapAndwrite(task.path);
+                    task.bitmap = PicUtil.getbitmap(task.path);
                     caches.put(task.path, new SoftReference<Bitmap>(task.bitmap));
                     if(handler != null){
                         // 创建消息对象，并将完成的任务添加到消息对象中
