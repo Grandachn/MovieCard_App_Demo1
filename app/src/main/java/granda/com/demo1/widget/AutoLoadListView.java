@@ -11,6 +11,7 @@ import granda.com.demo1.R;
 
 /**
  * Created by Granda on 4/30/2017.
+ * 自动加载的自定义View
  */
 public class AutoLoadListView extends ListView {
 

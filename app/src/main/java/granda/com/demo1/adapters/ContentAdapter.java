@@ -1,6 +1,5 @@
 package granda.com.demo1.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -20,6 +19,7 @@ import granda.com.demo1.widget.MovieCardView;
 
 /**
  * Created by Granda on 4/30/2017.
+ * 主页的ListView的Adapter
  */
 public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
     private List<String> mDatas;
@@ -49,7 +49,7 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_test, viewGroup, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.movie_card_list, viewGroup, false);
             viewHolder = new ViewHolder();
 
             viewHolder.imageButton1 = (MovieCardView) view.findViewById(R.id.imageButton1);

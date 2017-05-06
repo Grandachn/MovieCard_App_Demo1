@@ -17,6 +17,7 @@ import granda.com.demo1.utils.PicUtil;
 
 /**
  * Created by Granda on 5/1/2017.
+ * 图片加载类
  */
 public class AsynImageLoader {
 

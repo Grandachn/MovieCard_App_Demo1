@@ -13,6 +13,9 @@ import granda.com.demo1.adapters.ContentAdapter;
 import granda.com.demo1.R;
 import granda.com.demo1.widget.AutoLoadListView;
 
+/**
+ * 主页Activity
+ */
 public class HomeActivity extends AppCompatActivity
         implements AutoLoadListView.Pagingable, SwipeRefreshLayout.OnRefreshListener {
     private AutoLoadListView mListView;

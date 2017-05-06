@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by Granda on 5/2/2017.
+ * 电影详情页的pager的adapter
  */
 public class DetailPicPageViewAdapter<T extends View>  extends PagerAdapter {
     private List<T> mList;

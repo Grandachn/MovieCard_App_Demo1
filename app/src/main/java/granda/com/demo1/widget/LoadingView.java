@@ -6,6 +6,9 @@ import android.widget.LinearLayout;
 
 import granda.com.demo1.R;
 
+/**
+ *底部显示loading的view
+ */
 public class LoadingView extends LinearLayout {
 
     public LoadingView(Context context) {

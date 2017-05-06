@@ -8,6 +8,7 @@ import granda.com.demo1.R;
 
 /**
  * Created by Granda on 4/30/2017.
+ * 电影卡片的自定义View
  */
 public class MovieCardView extends LinearLayout {
     public MovieCardView(Context context) {

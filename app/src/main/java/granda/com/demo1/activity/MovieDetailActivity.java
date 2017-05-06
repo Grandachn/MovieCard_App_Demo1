@@ -17,6 +17,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by Granda on 5/2/2017.
+ * 电影详情Activity
  */
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -25,15 +26,17 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_detail);
-        this.getBaseContext();
 
 
-
-//        ImageView imageView = (ImageView) findViewById(R.id.movie_detail_post);
-//        String imageUrl ="https://img3.doubanio.com/view/photo/photo/public/p2456739325.jpg";
-//        new AsynImageLoader().showImageAsyn(imageView, imageUrl, R.drawable.test);
-
-
+        ImageView returnArrow = (ImageView) findViewById(R.id.return_arrow);
+        returnArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieDetailActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        //显示图片
         ViewPager viewPager = (ViewPager) findViewById(R.id.movie_detail_viewpager);
         LayoutInflater inflater=getLayoutInflater();
         View view1 = inflater.inflate(R.layout.movie_detail_pics, null);
@@ -56,7 +59,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         viewList.add(view2);
         viewList.add(view3);
 
-
+        //小白点效果
         DetailPicPageViewAdapter adapter = new DetailPicPageViewAdapter<View>(viewList);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.movie_detail_indicator);
         viewPager.setAdapter(adapter);
@@ -65,14 +68,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
 
-        //https://img3.doubanio.com/view/photo/photo/public/p2456739325.jpg
-        ImageView returnArrow = (ImageView) findViewById(R.id.return_arrow);
-        returnArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MovieDetailActivity.this,HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
+
+
+
     }
 }
