@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import granda.com.demo1.R;
+import granda.com.demo1.activity.FirstFragment;
 import granda.com.demo1.activity.MovieDetailActivity;
 import granda.com.demo1.https.AsynImageLoader;
 import granda.com.demo1.widget.MovieCardView;
@@ -93,7 +94,8 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
                 Log.d("tag", "Btn_onClick: " + "view = " + view);
                 Intent intent = new Intent(mContext,MovieDetailActivity.class);
                 mContext.startActivity(intent);
-               // Toast.makeText(mContext,"imageButton1",Toast.LENGTH_SHORT).show();
+
+                // Toast.makeText(mContext,"imageButton1",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton2:
                 Log.d("tag", "Tv_onClick: " + "view = " + view);

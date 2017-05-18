@@ -1,97 +1,114 @@
 package granda.com.demo1.activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import granda.com.demo1.adapters.ContentAdapter;
 import granda.com.demo1.R;
-import granda.com.demo1.widget.AutoLoadListView;
+
 
 /**
  * 主页Activity
  */
-public class HomeActivity extends AppCompatActivity
-        implements AutoLoadListView.Pagingable, SwipeRefreshLayout.OnRefreshListener {
-    private AutoLoadListView mListView;
-    private List<String> mDatas = new ArrayList<>();
-    private ContentAdapter mAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private int mIndex;
+public class HomeActivity extends AppCompatActivity {
+
+    private TextView title;
+
+    private FirstFragment firstFragment;
+    private SecondFragment secondFragment;
+    private ThridFragment thridFragment;
+
+    private LinearLayout button1;
+    private LinearLayout button2;
+    private LinearLayout button3;
+
+    private ImageView imageView1;
+    private ImageView imageView2;
+    private ImageView imageView3;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-        initUI();
-        initData();
-        addEvent();
-    }
+        setDefaultFragment();
 
-    private void initUI() {
-        mListView = (AutoLoadListView) findViewById(R.id.paging_list_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swp);
-        //设置圈圈颜色
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-    }
+        title = (TextView) findViewById(R.id.titlebar);
 
-    private void initData() {
-        generateData();
-        mAdapter = new ContentAdapter(mDatas,this);
-        mListView.setAdapter(mAdapter);
-        //设置还有更多数据加载
-        mListView.setHasMoreItems(true);
-    }
+        button1 = (LinearLayout) findViewById(R.id.button);
+        button2 = (LinearLayout) findViewById(R.id.button2);
+        button3 = (LinearLayout) findViewById(R.id.button3);
 
-    /**
-     * 生成数据
-     */
-    private void generateData() {
-        for (int i = 0; i < 20; i++) {
-            mDatas.add("数据" + mIndex ++);
-        }
-    }
+        imageView1 = (ImageView) findViewById(R.id.image_1);
+        imageView2 = (ImageView) findViewById(R.id.image_2);
+        imageView3 = (ImageView) findViewById(R.id.image_3);
+        imageView1.setImageResource(R.drawable.discovery_green);
 
-    private void addEvent() {
-        mListView.setPagingableListener(this);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-    }
-
-    /**
-     * 加载更多数据
-     */
-    @Override
-    public void onLoadMoreItems() {
-        new Handler().postDelayed(new Runnable() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                generateData();
-                mAdapter.notifyDataSetChanged();
-                //设置为loading完成
-                mListView.setIsLoading(false);
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                if(null == firstFragment) {
+                    firstFragment = new FirstFragment();
+                }
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(R.id.id_content, firstFragment);
+                transaction.commit();
+                imageView1.setImageResource(R.drawable.discovery_green);
+                imageView2.setImageResource(R.drawable.file);
+                imageView3.setImageResource(R.drawable.me);
+                title.setText("最新");
             }
-        }, 1500);
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                if(null == secondFragment) {
+                    secondFragment = new SecondFragment();
+                }
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(R.id.id_content, secondFragment);
+                transaction.commit();
+                imageView1.setImageResource(R.drawable.discovery);
+                imageView2.setImageResource(R.drawable.file_green);
+                imageView3.setImageResource(R.drawable.me);
+                title.setText("收藏");
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                if(null == thridFragment) {
+                    thridFragment = new ThridFragment();
+                }
+                //淡入淡出的默认动画
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(R.id.id_content, thridFragment);
+                transaction.commit();
+                imageView1.setImageResource(R.drawable.discovery);
+                imageView2.setImageResource(R.drawable.file);
+                imageView3.setImageResource(R.drawable.me_green);
+                title.setText("个人");
+            }
+        });
     }
 
-    /**
-     * 刷新数据,把集合清空,把角标设置为0
-     */
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mDatas.clear();
-                mIndex = 0;
-                generateData();
-                mAdapter.notifyDataSetChanged();
-                //隐藏圈圈
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 1500);
+    private void setDefaultFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        firstFragment = new FirstFragment();
+        transaction.replace(R.id.id_content, firstFragment);
+        transaction.commit();
     }
 }

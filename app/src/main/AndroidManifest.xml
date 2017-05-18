@@ -11,6 +11,7 @@
 
         <activity android:name=".activity.HomeActivity"
             android:screenOrientation="portrait"
+            android:launchMode = "singleTask"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,12 @@
         <activity android:name=".activity.MovieDetailActivity"
             android:screenOrientation="portrait"
             >
+        </activity>
 
+        <activity android:name=".activity.DoubanPageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            >
         </activity>
 
     </application>

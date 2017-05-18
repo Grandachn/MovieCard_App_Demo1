@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorTextGray"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/button"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/buttom_bar_image"
+                android:layout_height="@dimen/buttom_bar_image"
+                android:id="@+id/image_1"
+                android:background="@drawable/discovery"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/button2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/buttom_bar_image"
+                android:layout_height="@dimen/buttom_bar_image"
+                android:id="@+id/image_2"
+                android:background="@drawable/file"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/button3"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/buttom_bar_image"
+                android:layout_height="@dimen/buttom_bar_image"
+                android:id="@+id/image_3"
+                android:background="@drawable/me"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

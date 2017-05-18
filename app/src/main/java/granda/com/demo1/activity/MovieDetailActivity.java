@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MovieDetailActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         //显示图片
@@ -53,6 +55,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         ImageView imageView3 = (ImageView) view3.findViewById(R.id.movie_detail_pic);
         String imageUrl3 ="https://img3.doubanio.com/view/photo/photo/public/p2456575321.jpg";
         new AsynImageLoader().showImageAsyn(imageView3, imageUrl3, R.drawable.test);
+
+
+        //豆瓣页面
+        TextView douban = (TextView) findViewById(R.id.movie_douban_text);
+        douban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieDetailActivity.this, DoubanPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ArrayList<View> viewList = new ArrayList<View>();// 将要分页显示的View装入数组中
         viewList.add(view1);

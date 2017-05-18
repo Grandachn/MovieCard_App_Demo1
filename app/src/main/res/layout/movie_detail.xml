@@ -31,15 +31,35 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="拆弹专家"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/movie_detail_title"
+                android:text="拆弹专家"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/movie_douban_text"
+                android:text="豆瓣"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp"
+                android:layout_alignRight="@+id/movie_detail_title"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
 
         <ImageView
             android:layout_width="75dp"
