@@ -5,6 +5,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -29,7 +30,7 @@ import granda.com.demo1.R;
 /**
  * Created by Granda on 5/18/2017.
  */
-public class DoubanPageActivity extends AppCompatActivity {
+public class DoubanPageActivity extends AppCompatActivity{
 
         private WebView webView;
         private ProgressBar pg1;
@@ -39,7 +40,11 @@ public class DoubanPageActivity extends AppCompatActivity {
         private View customView;
         private FrameLayout fullscreenContainer;
         private WebChromeClient.CustomViewCallback customViewCallback;
-        @Override
+
+        private SwipeRefreshLayout swipeLayout;
+
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,13 +58,23 @@ public class DoubanPageActivity extends AppCompatActivity {
             webView=(WebView) findViewById(R.id.webView);
             pg1=(ProgressBar) findViewById(R.id.progressBar1);
             returnBack  = (ImageView) findViewById(R.id.douban_page_return);
-
             returnBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
                 }
             });
+
+            swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swp_web);
+            swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+                @Override
+                public void onRefresh() {
+                    //重新刷新页面
+                    webView.loadUrl(webView.getUrl());
+                }
+            });
+            swipeLayout.setColorSchemeResources(R.color.colorPrimary);
 
             webView.setWebViewClient(new WebViewClient() {
                 //覆写shouldOverrideUrlLoading实现内部显示网页
@@ -84,9 +99,12 @@ public class DoubanPageActivity extends AppCompatActivity {
                 public void onProgressChanged(WebView view, int newProgress) {
                     if (newProgress == 100) {
                         pg1.setVisibility(View.GONE);//加载完网页进度条消失
+                        swipeLayout.setRefreshing(false);
                     } else {
                         pg1.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
                         pg1.setProgress(newProgress);//设置进度值
+                        if (swipeLayout.isRefreshing())
+                            swipeLayout.setRefreshing(true);
                     }
                 }
 
@@ -152,6 +170,7 @@ public class DoubanPageActivity extends AppCompatActivity {
         customViewCallback.onCustomViewHidden();
         webView.setVisibility(View.VISIBLE);
     }
+
 
     /** 全屏容器界面 */
     static class FullscreenHolder extends FrameLayout {
