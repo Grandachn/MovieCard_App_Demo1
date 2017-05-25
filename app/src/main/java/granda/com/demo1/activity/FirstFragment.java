@@ -89,7 +89,7 @@ public class FirstFragment extends Fragment implements AutoLoadListView.Pagingab
             }
         };
 
-        AsynMovieCardLoader task = new AsynMovieCardLoader("http://192.168.199.161:8080/moviecard_bg/movie/get.json", handler);
+        AsynMovieCardLoader task = new AsynMovieCardLoader("http://123.207.31.65:8080/moviecard_bg/movie/get.json", handler);
         task.execute();
     }
 

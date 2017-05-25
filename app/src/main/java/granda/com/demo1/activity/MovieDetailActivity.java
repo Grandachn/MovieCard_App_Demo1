@@ -69,7 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         };
 
-        String url = "http://192.168.199.161:8080/moviecard_bg/movie/detail.json?movieId=" + getIntent.getStringExtra("movieId") ;
+        String url = "http://123.207.31.65:8080/moviecard_bg/movie/detail.json?movieId=" + getIntent.getStringExtra("movieId") ;
         AsynMovieLoader task = new AsynMovieLoader(url, handler);
         task.execute();
     }
