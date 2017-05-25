@@ -1,8 +1,11 @@
 package granda.com.demo1.activity;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,8 @@ import java.util.List;
 
 import granda.com.demo1.R;
 import granda.com.demo1.adapters.ContentAdapter;
+import granda.com.demo1.entity.MovieCard;
+import granda.com.demo1.https.AsynMovieCardLoader;
 import granda.com.demo1.widget.AutoLoadListView;
 
 /**
@@ -20,24 +25,22 @@ import granda.com.demo1.widget.AutoLoadListView;
  */
 public class FirstFragment extends Fragment implements AutoLoadListView.Pagingable, SwipeRefreshLayout.OnRefreshListener{
     private AutoLoadListView mListView;
-    private List<String> mDatas = new ArrayList<>();
+    private List<MovieCard> mDatas = new ArrayList<>();
     private ContentAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private int mIndex;
     private View view;
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.home);
-//        initUI();
-//        initData();
-//        addEvent();
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+            return view;
+        }
         this.view = inflater.inflate(R.layout.home_refrsh_list, container, false);
         initUI();
         initData();
@@ -55,19 +58,39 @@ public class FirstFragment extends Fragment implements AutoLoadListView.Pagingab
 
     private void initData() {
         generateData();
-        mAdapter = new ContentAdapter(mDatas,this.getActivity());
-        mListView.setAdapter(mAdapter);
-        //设置还有更多数据加载
-        mListView.setHasMoreItems(true);
+
     }
 
     /**
      * 生成数据
      */
     private void generateData() {
-        for (int i = 0; i < 20; i++) {
-            mDatas.add("数据" + mIndex ++);
-        }
+        Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        for(MovieCard entity : (List<MovieCard>) msg.obj){
+                            mDatas.add(entity);
+                        }
+                        if(null == mAdapter){
+                            mAdapter = new ContentAdapter(mDatas,getActivity());
+                            mListView.setAdapter(mAdapter);
+                            //设置还有更多数据加载
+                            mListView.setHasMoreItems(true);
+                        }else{
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        AsynMovieCardLoader task = new AsynMovieCardLoader("http://192.168.199.161:8080/moviecard_bg/movie/get.json", handler);
+        task.execute();
     }
 
     private void addEvent() {
@@ -84,7 +107,7 @@ public class FirstFragment extends Fragment implements AutoLoadListView.Pagingab
             @Override
             public void run() {
                 generateData();
-                mAdapter.notifyDataSetChanged();
+
                 //设置为loading完成
                 mListView.setIsLoading(false);
             }
@@ -102,10 +125,14 @@ public class FirstFragment extends Fragment implements AutoLoadListView.Pagingab
                 mDatas.clear();
                 mIndex = 0;
                 generateData();
-                mAdapter.notifyDataSetChanged();
+
                 //隐藏圈圈
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1500);
+    }
+
+    public AutoLoadListView getmListView() {
+        return mListView;
     }
 }

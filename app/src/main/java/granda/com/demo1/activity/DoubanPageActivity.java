@@ -1,6 +1,7 @@
 package granda.com.demo1.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -50,7 +52,8 @@ public class DoubanPageActivity extends AppCompatActivity{
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.douban_page);
             init();
-            webView.loadUrl("https://m.douban.com/movie/subject/26748673/");
+            String url = "https://m.douban.com/movie/subject/" + getIntent().getStringExtra("doubanId") + "/";
+            webView.loadUrl(url);
         }
 
         private void init() {

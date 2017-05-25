@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView imageView1;
     private ImageView imageView2;
     private ImageView imageView3;
+
+    private int count = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,20 @@ public class HomeActivity extends AppCompatActivity {
                 imageView2.setImageResource(R.drawable.file);
                 imageView3.setImageResource(R.drawable.me);
                 title.setText("最新");
+                count++;
+                if(count == 2){
+                    firstFragment.getmListView().smoothScrollToPosition(0);
+                    count = 0;
+                }
+                new Thread(new Runnable(){
+                    public void run() {
+                        try {
+                            Thread.sleep(500);
+                            count = 0;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }}).start();
             }
         });
 

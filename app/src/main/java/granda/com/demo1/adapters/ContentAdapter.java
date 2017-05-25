@@ -2,19 +2,25 @@ package granda.com.demo1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.List;
 
 import granda.com.demo1.R;
 import granda.com.demo1.activity.FirstFragment;
 import granda.com.demo1.activity.MovieDetailActivity;
+import granda.com.demo1.entity.MovieCard;
 import granda.com.demo1.https.AsynImageLoader;
 import granda.com.demo1.widget.MovieCardView;
 
@@ -23,17 +29,39 @@ import granda.com.demo1.widget.MovieCardView;
  * 主页的ListView的Adapter
  */
 public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
-    private List<String> mDatas;
+    private List<MovieCard> mDatas;
     private Context mContext;
+    private Bitmap star_0;
+    private Bitmap star_1;
+    private Bitmap star_2;
+    private Bitmap star_3;
+    private Bitmap star_4;
+    private Bitmap star_5;
 
-    public ContentAdapter(List<String> mDatas, Context mContext) {
+    public ContentAdapter(List<MovieCard> mDatas, Context mContext) {
         this.mDatas = mDatas;
         this.mContext = mContext;
+        star_0 = readBitMap(mContext, R.drawable.star_0);
+        star_1 = readBitMap(mContext, R.drawable.star_1);
+        star_2 = readBitMap(mContext, R.drawable.star_2);
+        star_3 = readBitMap(mContext, R.drawable.star_3);
+        star_4 = readBitMap(mContext, R.drawable.star_4);
+        star_5 = readBitMap(mContext, R.drawable.star_5);
+    }
+
+    public  Bitmap readBitMap(Context context, int resId){
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        opt.inPurgeable = true;
+        opt.inInputShareable = true;
+        //获取资源图片
+        InputStream is = context.getResources().openRawResource(resId);
+        return BitmapFactory.decodeStream(is,null,opt);
     }
 
     @Override
     public int getCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return mDatas == null ? 0 : mDatas.size()/3;
     }
 
     @Override
@@ -64,55 +92,73 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
         viewHolder = (ViewHolder)view.getTag();
 
         //设置数据
-
-        ImageView imageView = (ImageView) viewHolder.imageButton1.findViewById(R.id.movie_card_image);
-        String imageUrl = "https://img1.doubanio.com/view/movie_poster_cover/lpst/public/p2454868217.jpg";
-        AsynImageLoader asynImageLoader = new AsynImageLoader();
-        asynImageLoader.showImageAsyn(imageView, imageUrl, R.drawable.test);
-
-        ImageView imageView2 = (ImageView) viewHolder.imageButton2.findViewById(R.id.movie_card_image);
-        String imageUrl2 ="https://img3.doubanio.com/view/photo/thumb/public/p2456056900.jpg";
-        new AsynImageLoader().showImageAsyn(imageView2, imageUrl2, R.drawable.test);
+        MovieCard entity = mDatas.get(i * 3 + 0);
+        initMovieCard(entity,viewHolder.imageButton1);
 
 
-        ImageView imageView3 = (ImageView) viewHolder.imageButton3.findViewById(R.id.movie_card_image);
-        String imageUrl3 =" https://img3.doubanio.com/view/movie_poster_cover/lpst/public/p2455156816.jpg";
-        new AsynImageLoader().showImageAsyn(imageView3, imageUrl3, R.drawable.test);
+        entity = mDatas.get(i * 3 + 1);
+        initMovieCard(entity,viewHolder.imageButton2);
 
-        viewHolder.imageButton1.setOnClickListener(this);
-        viewHolder.imageButton2.setOnClickListener(this);
-        viewHolder.imageButton3.setOnClickListener(this);
+
+        entity = mDatas.get(i * 3 + 2);
+        initMovieCard(entity,viewHolder.imageButton3);
+
 
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
 
-            case R.id.imageButton1:
-                Log.d("tag", "Btn_onClick: " + "view = " + view);
-                Intent intent = new Intent(mContext,MovieDetailActivity.class);
-                mContext.startActivity(intent);
+            Log.d("tag", "Btn_onClick: " + "view = " + view);
+            Intent intent = new Intent(mContext,MovieDetailActivity.class);
+            MovieCardView entity = (MovieCardView)view;
+            intent.putExtra("movieId" , entity.getMovieId());
+            intent.putExtra("name" , entity.getName());
+            mContext.startActivity(intent);
 
-                // Toast.makeText(mContext,"imageButton1",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.imageButton2:
-                Log.d("tag", "Tv_onClick: " + "view = " + view);
-                Toast.makeText(mContext,"imageButton2",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.imageButton3:
-                Log.d("tag", "Btn_onClick: " + "view = " + view);
-                Toast.makeText(mContext,"imageButton3",Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 
     private static class ViewHolder {
 
-
         MovieCardView imageButton1;
         MovieCardView imageButton2;
         MovieCardView imageButton3;
+    }
+
+    private void initMovieCard(MovieCard entity,final MovieCardView imageButton){
+        imageButton.setDatas(entity.getId(), entity.getName(), entity.getPicUrl(), Float.parseFloat(entity.getPoint()));
+
+        ImageView imageView = (ImageView) imageButton.findViewById(R.id.movie_card_image);
+        new AsynImageLoader().showImageAsyn(imageView, imageButton.getPicUrl(), R.drawable.test);
+
+        TextView title = (TextView) imageButton.findViewById(R.id.movie_card_title);
+        title.setText(String.valueOf(imageButton.getName()));
+        if(String.valueOf(imageButton.getName()).length() > 7){
+            String titleShorcut = String.valueOf(imageButton.getName()).subSequence(0,7) + "...";
+            title.setText(titleShorcut);
+        }
+
+        TextView point = (TextView) imageButton.findViewById(R.id.movie_card_point_text);
+        point.setText(String.valueOf(imageButton.getPoint()));
+
+
+
+        ImageView pointImageView = (ImageView) imageButton.findViewById(R.id.movie_card_point_image);
+        if(imageButton.getPoint() == 0.0 ){
+            pointImageView.setImageBitmap(star_0);
+        }else if(imageButton.getPoint() < 2.0 ){
+            pointImageView.setImageBitmap(star_1);
+        }else if(imageButton.getPoint() < 4.0 ){
+            pointImageView.setImageBitmap(star_2);
+        }else if(imageButton.getPoint() < 6.0 ){
+            pointImageView.setImageBitmap(star_3);
+        }else if(imageButton.getPoint() < 8.0 ){
+            pointImageView.setImageBitmap(star_4);
+        }else if(imageButton.getPoint() < 10.0 ){
+            pointImageView.setImageBitmap(star_5);
+        }
+
+        imageButton.setOnClickListener(this);
     }
 }

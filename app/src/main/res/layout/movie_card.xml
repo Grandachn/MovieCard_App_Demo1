@@ -19,6 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/movie_card_title"
         android:text="拆弹专家"
         android:textSize="12dp"
         android:textColor="@color/colorTextBlack"/>
@@ -31,12 +32,14 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="10dp"
+            android:id="@+id/movie_card_point_image"
             android:background="@drawable/star_4"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/movie_card_point_text"
             android:text="7.2"
             android:textColor="@color/colorTextGray"
             android:gravity="center"
