@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.carbs.android.expandabletextview.library.ExpandableTextView;
 import granda.com.demo1.R;
 import granda.com.demo1.adapters.ContentAdapter;
 import granda.com.demo1.adapters.DetailPicPageViewAdapter;
@@ -130,6 +131,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
+
+        //普通视图中的更新
+        ExpandableTextView etv=(ExpandableTextView)findViewById(R.id.movie_detail_alias);
+       // etv.setText("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
+//在ListView/RecyclerView中的应用，etvWidth为控件的真实宽度，state是控件所处的状态，“收缩”/“伸展”状态
+        etv.updateForRecyclerView("...", etv.getWidth(), 0);
 
     }
 }
