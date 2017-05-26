@@ -130,7 +130,7 @@ public class ContentAdapter extends BaseAdapter implements View.OnClickListener{
         imageButton.setDatas(entity.getId(), entity.getName(), entity.getPicUrl(), Float.parseFloat(entity.getPoint()));
 
         ImageView imageView = (ImageView) imageButton.findViewById(R.id.movie_card_image);
-        new AsynImageLoader().showImageAsyn(imageView, imageButton.getPicUrl(), R.drawable.test);
+        new AsynImageLoader().showImageAsyn(imageView, imageButton.getPicUrl(), R.drawable.aphal0);
 
         TextView title = (TextView) imageButton.findViewById(R.id.movie_card_title);
         title.setText(String.valueOf(imageButton.getName()));

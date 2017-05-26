@@ -100,44 +100,47 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="top"
                 >
                 <TextView
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/textview_margin_left"
                     android:text="别名："
 
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/movie_detail_alias"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
-
                     />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="top"
                 >
                 <TextView
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextBlack"
                     android:text="地区："
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/textview_margin_left"
 
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
@@ -147,22 +150,26 @@
             </LinearLayout>
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="top"
                 >
                 <TextView
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/textview_margin_left"
                     android:text="年份："
 
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
@@ -171,72 +178,80 @@
             </LinearLayout>
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="top"
                 >
                 <TextView
                     android:layout_width="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/textview_margin_left"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:text="导演："
-
-
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
                     android:id="@+id/movie_detail_director"
-
                     />
-
             </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="top"
                 >
                 <TextView
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:text="编剧："
-                    android:layout_marginLeft="10dp"
-
+                    android:layout_marginLeft="@dimen/textview_margin_left"
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
                     android:id="@+id/movie_detail_screenWriter"
-
                     />
             </LinearLayout>
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="top">
                 <TextView
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTextBlack"
                     android:text="演员："
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/textview_margin_left"
 
                     />
 
                 <cn.carbs.android.expandabletextview.library.ExpandableTextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextGray"
                     android:layout_marginRight="10dp"
@@ -244,26 +259,6 @@
 
                     />
             </LinearLayout>
-
-
-
-
-
-
-
-
         </LinearLayout>
-
-
-
     </ScrollView>
-
-
-
-
-
-
-
-
-
 </LinearLayout>

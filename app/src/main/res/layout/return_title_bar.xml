@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:id="@+id/return_bar_title"
         android:text="详情"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -20,8 +20,8 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/return_arrow"
          />
 

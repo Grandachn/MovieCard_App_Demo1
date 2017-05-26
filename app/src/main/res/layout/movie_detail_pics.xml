@@ -8,6 +8,5 @@
         android:layout_height="250dp"
         android:id="@+id/movie_detail_pic"
         android:scaleType="centerCrop"
-        android:background="@color/colorPrimaryDark"
         />
 </LinearLayout>

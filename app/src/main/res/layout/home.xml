@@ -9,7 +9,7 @@
         android:layout_height="@dimen/title_bar_height"
         android:id="@+id/titlebar"
         android:text="最新"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="@android:color/white"

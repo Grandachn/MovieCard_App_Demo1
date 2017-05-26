@@ -81,15 +81,15 @@ public class MovieDetailActivity extends AppCompatActivity {
         LayoutInflater inflater=getLayoutInflater();
         View view1 = inflater.inflate(R.layout.movie_detail_pics, null);
         ImageView imageView1 = (ImageView) view1.findViewById(R.id.movie_detail_pic);
-        new AsynImageLoader().showImageAsyn(imageView1, movie.getMoviePics().get(0).getPicUrl(), R.drawable.test);
+        new AsynImageLoader().showImageAsyn(imageView1, movie.getMoviePics().get(0).getPicUrl(), R.drawable.aphal0);
 
         View view2 = inflater.inflate(R.layout.movie_detail_pics, null);
         ImageView imageView2 = (ImageView) view2.findViewById(R.id.movie_detail_pic);
-        new AsynImageLoader().showImageAsyn(imageView2,  movie.getMoviePics().get(1).getPicUrl(), R.drawable.test);
+        new AsynImageLoader().showImageAsyn(imageView2,  movie.getMoviePics().get(1).getPicUrl(), R.drawable.aphal0);
 
         View view3 = inflater.inflate(R.layout.movie_detail_pics, null);
         ImageView imageView3 = (ImageView) view3.findViewById(R.id.movie_detail_pic);
-        new AsynImageLoader().showImageAsyn(imageView3,  movie.getMoviePics().get(2).getPicUrl(), R.drawable.test);
+        new AsynImageLoader().showImageAsyn(imageView3,  movie.getMoviePics().get(2).getPicUrl(), R.drawable.aphal0);
 
         TextView tv_point = (TextView) findViewById(R.id.detail_point_text);
         tv_point.setText(movie.getPoint());
@@ -133,10 +133,39 @@ public class MovieDetailActivity extends AppCompatActivity {
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
 
         //普通视图中的更新
-        ExpandableTextView etv=(ExpandableTextView)findViewById(R.id.movie_detail_alias);
-       // etv.setText("222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-//在ListView/RecyclerView中的应用，etvWidth为控件的真实宽度，state是控件所处的状态，“收缩”/“伸展”状态
-        etv.updateForRecyclerView("...", etv.getWidth(), 0);
+        ExpandableTextView alias_tv=(ExpandableTextView)findViewById(R.id.movie_detail_alias);
+        alias_tv.updateForRecyclerView(formatString(movie.getAlias()), alias_tv.getWidth(), 0);
 
+        ExpandableTextView region_tv=(ExpandableTextView)findViewById(R.id.movie_detail_region);
+        region_tv.updateForRecyclerView(formatString(movie.getRegion()), region_tv.getWidth(), 0);
+
+        ExpandableTextView year_tv=(ExpandableTextView)findViewById(R.id.movie_detail_year);
+        year_tv.updateForRecyclerView(formatString(movie.getYear()), year_tv.getWidth(), 0);
+
+        ExpandableTextView director_tv=(ExpandableTextView)findViewById(R.id.movie_detail_director);
+        director_tv.updateForRecyclerView(formatString(movie.getDirector()), director_tv.getWidth(), 0);
+
+        ExpandableTextView screenWriter_tv=(ExpandableTextView)findViewById(R.id.movie_detail_screenWriter);
+        screenWriter_tv.updateForRecyclerView(formatString(movie.getScreenWriter()), screenWriter_tv.getWidth(), 0);
+
+        ExpandableTextView actor_tv=(ExpandableTextView)findViewById(R.id.movie_detail_actor);
+        actor_tv.updateForRecyclerView(formatString(movie.getActor()), actor_tv.getWidth(), 0);
+
+    }
+
+    private String formatString(String s){
+        StringBuffer sb = new StringBuffer();
+        String[] ss = s.split("!");
+        if(ss.length > 1){
+            for(int i = 0 ; i < ss.length -1 ; i++){
+                sb.append(ss[i]);
+                sb.append("    ");
+            }
+            sb.append(ss[ss.length -1]);
+        }else{
+            sb.append(ss[0]);
+        }
+
+        return sb.toString();
     }
 }
